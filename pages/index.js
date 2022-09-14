@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Sidebar from '../components/Sidebar'
+
 
 
 export default function Home(){
@@ -8,9 +10,25 @@ export default function Home(){
         <title>Twitter-clone</title>
       </Head>
 
-      <div className="">
+      <main>
+        {/* sidebar  */}
+        <Sidebar/>
 
-      </div>
+
+        {/* feed  */}
+
+
+        {/* Widgets  */}
+
+
+
+        {/* Modal */}
+
+      </main>
+
+     
     </div>
   )
 }
+
+
