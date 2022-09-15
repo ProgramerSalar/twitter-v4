@@ -8,7 +8,7 @@ import {HomeIcon , BookmarkIcon ,  HashtagIcon, BellIcon, InboxIcon, ClipboardIc
 
 export default function Sidebar(){
     return (
-        <div className="sm:flex flex-col p-2 xl:items-start fixed h-full">
+        <div className="sm:flex flex-col p-2 xl:items-start fixed h-full xl:ml-24">
 
             {/* Twitter Logo  */}
             <div className="hoverEffect p-0 hover:bg-blue-100 xl:px-1">
@@ -49,3 +49,8 @@ export default function Sidebar(){
         </div>
     )
 }
+
+
+// https://saurav.tech/NewsAPI/top-headlines/category/business/in.json
+
+
