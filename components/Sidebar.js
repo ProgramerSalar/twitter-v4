@@ -1,12 +1,13 @@
-
-
 import Image from "next/image";
 import SidebarMenuItem from  "./SidebarMenuItem"
+import { useSession , signIn  , signOut  } from "next-auth/react";
 
 
 import {HomeIcon , BookmarkIcon ,  HashtagIcon, BellIcon, InboxIcon, ClipboardIcon, UserIcon, EllipsisHorizontalIcon} from "@heroicons/react/24/solid"
 
 export default function Sidebar(){
+    const {data : session} = useSession();
+
     return (
         <div className="sm:flex flex-col p-2 xl:items-start fixed h-full xl:ml-24">
 
@@ -17,40 +18,50 @@ export default function Sidebar(){
 
             {/* Menu  */}
             <div className="mt-4 mb-2.5 xl:items-start">
-                <SidebarMenuItem text="Home" Icon={HomeIcon}/>
-                <SidebarMenuItem text="Explore" Icon={HashtagIcon}/>
-                <SidebarMenuItem text="Notifications" Icon={BellIcon}/>
-                <SidebarMenuItem text="Messages" Icon={InboxIcon}/>
-                <SidebarMenuItem text="Bookmarks" Icon={BookmarkIcon}/>
-                <SidebarMenuItem text="Lists" Icon={ClipboardIcon}/>
-                <SidebarMenuItem text="Profile" Icon={UserIcon}/>
-                <SidebarMenuItem text="More" Icon={EllipsisHorizontalIcon}/>
+                {session && (
+                    <>
+                     <SidebarMenuItem text="Home" Icon={HomeIcon}/>
+                    <SidebarMenuItem text="Explore" Icon={HashtagIcon}/>
+                    <SidebarMenuItem text="Notifications" Icon={BellIcon}/>
+                    <SidebarMenuItem text="Messages" Icon={InboxIcon}/>
+                    <SidebarMenuItem text="Bookmarks" Icon={BookmarkIcon}/>
+                    <SidebarMenuItem text="Lists" Icon={ClipboardIcon}/>
+                    <SidebarMenuItem text="Profile" Icon={UserIcon}/>
+                    <SidebarMenuItem text="More" Icon={EllipsisHorizontalIcon}/>
+                    
+                    </>
+                )}
+               
             </div>
 
                 {/* button  */}
+                {session ?(
+                    <>
 
-            <button className="text-black bg-blue-400 rounded-full w-56 h-[52px] text-lg font-bold shadow-sm hover:brightness-95">Tweet</button>
+                        <button className="text-black bg-blue-400 rounded-full w-56 h-[52px] text-lg font-bold shadow-sm hover:brightness-95">Tweet</button>
 
-                {/* miniprofile  */}
+                        {/* miniprofile  */}
 
-            <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
-                <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Twemoji_1f600.svg/1200px-Twemoji_1f600.svg.png"
-                alt="user-img"
-                className="h-6 w-6 rounded-full xl:mr-2"/>
+                        <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
+                        <img
+                        src={session.user.image}
+                        alt="user-img"
+                        className="h-6 w-6 rounded-full xl:mr-2"/>
 
-                <div className="leading-5 rounded-full xl:mr-2">
-                    <h4 className="font-bold">manishkumar</h4>
-                    <p className="text-gray-500">@codewithmanish</p>
-                </div>
-                <EllipsisHorizontalIcon className="h-5 xl:ml-8 hidden xl:inline"/>
-                
-            </div>
+                        <div className="leading-5 rounded-full xl:mr-2">
+                            <h4 className="font-bold">{session.user.name}</h4>
+                            <p className="text-gray-500">@{session.user.username}</p>
+                        </div>
+                        <EllipsisHorizontalIcon className="h-5 xl:ml-8 hidden xl:inline"/>
+
+                        </div>
+                    
+                    </>
+                ):(
+                    <button onClick={signIn} className="bg-blue-400 text-white rounded-full w-36 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">sign in</button>
+                )}
+
+            
         </div>
     )
-}
-
-
-// https://saurav.tech/NewsAPI/top-headlines/category/business/in.json
-
-
+};

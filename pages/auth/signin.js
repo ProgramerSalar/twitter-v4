@@ -1,7 +1,7 @@
 
 import {getProviders, signIn} from "next-auth/react"
 
-export default function signin({providers}){
+export default function signIn({providers}){fffffffffffffffff
     return(
         <div className="flex justify-center mt-20 space-x-4">
             <img src="https://simplify360.com/wp-content/uploads/2021/05/Banner-change-with-Twitter-Publishing-Twitter-Chat-bot-screen.png"
@@ -29,6 +29,9 @@ export async function getServerSideProps(){
         },
     }
 }
+
+
+
 
 
 
